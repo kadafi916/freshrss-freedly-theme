@@ -523,41 +523,43 @@ img.favicon {
 	color: var(--fl-text-tertiary);
 }
 
-/* Feedly's list thumbnails run noticeably bigger than FreshRSS's defaults
-   (60-128px depending on portrait/square/landscape, 40-80px tall) — scale
-   every variant up ~35-40% rather than just the one this account happens
-   to use, so it still looks right if the thumbnail-shape setting changes. */
+/* Sized from Feedly's actual request, not a guess: its image-resize CDN
+   call for a magazine-view thumbnail is literally
+   "visuals.feedly.com/v1/resize?sizes=163x98!0.8" (163x98px, captured
+   from a saved Feedly page's live DOM) - so the landscape/square/portrait
+   variants below are all scaled off that 163x98 baseline rather than
+   FreshRSS's own defaults (60-128px wide, 40-80px tall). */
 .flux .flux_header .item.thumbnail {
 	padding: 0.75rem 0.5rem 0.75rem 0.75rem;
-	height: 108px;
+	height: 98px;
 }
 
 .flux .flux_header .item.thumbnail.small {
-	height: 64px;
+	height: 49px;
 }
 
 .flux .flux_header .item.thumbnail.portrait {
-	width: 80px;
+	width: 66px;
 }
 
 .flux .flux_header .item.thumbnail.square {
-	width: 108px;
+	width: 98px;
 }
 
 .flux .flux_header .item.thumbnail.landscape {
-	width: 168px;
+	width: 163px;
 }
 
 .flux .flux_header .item.thumbnail.portrait.small {
-	width: 48px;
+	width: 33px;
 }
 
 .flux .flux_header .item.thumbnail.square.small {
-	width: 64px;
+	width: 49px;
 }
 
 .flux .flux_header .item.thumbnail.landscape.small {
-	width: 96px;
+	width: 82px;
 }
 
 .flux .flux_header .item.thumbnail img {

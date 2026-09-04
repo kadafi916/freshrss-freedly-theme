@@ -100,8 +100,11 @@ layout:
   something the theme can turn on by itself). Note some feeds simply don't
   publish a description in their RSS, so a few entries may still show no
   excerpt regardless of this setting.
-- **Thumbnail shape** (`topline_thumbnail`) — any of Square / Portrait /
-  Landscape work; the theme scales all three consistently.
+- **Thumbnail shape** (`topline_thumbnail`) — set to **Landscape** for the
+  closest match. The theme's default sizing (163×98) is Feedly's actual
+  magazine-view thumbnail dimension, captured from its own image-resize
+  CDN request; Square/Portrait are scaled proportionally from the same
+  baseline if you prefer those instead.
 
 ## Known limitations
 

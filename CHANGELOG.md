@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.1 — 2026-09-04
+
+- Thumbnails re-sized to Feedly's actual dimensions: 163×98 (landscape),
+  scaled proportionally for the square/portrait variants and their
+  `.small` counterparts. Previous release used a guessed 108px square;
+  this one is sourced from Feedly's own image-resize CDN request
+  (`visuals.feedly.com/v1/resize?sizes=163x98!0.8`), captured from a
+  saved copy of a live Feedly page's DOM.
+- README now recommends the `landscape` thumbnail-shape setting (under
+  Settings → Reading) to actually get that crop — `square` can't produce
+  it regardless of CSS sizing.
+
 ## 1.0.0 — 2026-09-04
 
 Initial release.
