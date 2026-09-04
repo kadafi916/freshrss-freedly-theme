@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.2 — 2026-09-04
+
+- Actually fixed the horizontal line between article rows this time.
+  1.1.1 removed this theme's own `border-top` on `.flux_header`, but
+  missed that Origine sets the exact same declaration directly on that
+  selector too — so the line never actually went away, just lost its
+  redundant second source. Explicitly overridden now.
+
 ## 1.1.1 — 2026-09-04
 
 - Removed the row-separator lines in the article list: the horizontal

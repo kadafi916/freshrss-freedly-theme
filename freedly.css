@@ -556,10 +556,15 @@ img.favicon {
 
 .flux_header {
 	padding: 0 0.5rem;
+	/* Origine itself sets "border-top: 1px solid var(--border-color)"
+	   directly on this selector (not just something this theme added) -
+	   removing this theme's own copy of that rule in 1.1.1 didn't
+	   actually remove the line, since Origine's identical declaration
+	   was still there underneath. Explicitly killing it this time. */
+	border-top: none;
 }
 
-/* Kill any row-separator lines - the horizontal one above was this
-   theme's own border-top (removed per feedback); the vertical one
+/* Kill any row-separator lines - the vertical one
    between thumbnail and title didn't trace back to a rule this theme
    set (not in Origine/frss.css either), so reset border/outline
    broadly on the row's flex items rather than leave it unexplained. */
