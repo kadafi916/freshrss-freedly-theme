@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.5 — 2026-09-04
+
+- Moved the read/favorite-toggle icons and favicon from the start of
+  each article row to the end (after the title/byline/excerpt block),
+  matching where Feedly places its per-entry action icons. Required
+  switching the row from FreshRSS's default CSS table layout to flex so
+  `order` could move them without touching PHP templates; thumbnail and
+  title stay first, everything else falls in after in its existing
+  relative order.
+
 ## 1.0.4 — 2026-09-04
 
 - Fixed: favicons could render squished/stretched into a thin sliver

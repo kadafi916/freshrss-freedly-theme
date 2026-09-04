@@ -524,6 +524,29 @@ img.favicon {
 	padding: 0 0.5rem;
 }
 
+/* FreshRSS lays each row out as a CSS table (thumbnail/title after the
+   read+favorite+favicon icon cells, in that DOM order) — Feedly puts the
+   read/favorite/link-style icons after the title instead. Switching this
+   row to flex lets `order` move them there without touching the PHP
+   templates: thumbnail and title go first, everything else (both manage
+   icons, the favicon, and share/labels/link if enabled) falls in after
+   in its existing relative order since it's left at the default order. */
+.flux .flux_header.horizontal-list {
+	display: flex;
+	align-items: center;
+}
+
+.flux .flux_header.horizontal-list > .item.thumbnail {
+	order: -3;
+	flex-shrink: 0;
+}
+
+.flux .flux_header.horizontal-list > .item.titleAuthorSummaryDate {
+	order: -2;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
 /* Read/favorite toggle + favicon-only "website" column all shipped with
    generous FreshRSS default padding (40px+ each, meant for a denser
    classic reader) leaving visible gaps between icons - Feedly clusters
@@ -533,6 +556,7 @@ img.favicon {
    switched to show the feed name instead. */
 .flux .flux_header .item.manage {
 	width: 30px;
+	flex-shrink: 0;
 }
 
 .flux .flux_header .item.manage .item-element {
@@ -542,6 +566,7 @@ img.favicon {
 
 .flux .flux_header.websiteicon .item.website {
 	width: 28px;
+	flex-shrink: 0;
 }
 
 .flux .item.website .item-element {
