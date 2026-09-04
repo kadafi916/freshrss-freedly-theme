@@ -713,6 +713,10 @@ img.favicon {
 	padding: 0.75rem 0.75rem 0.75rem 0;
 }
 
+/* font-size/weight measured from Feedly's own DevTools Computed panel
+   on a real title element: 16px, weight 650 (InterVariable's fractional
+   weight, not just 600/700) - not a guess like the rest of this file's
+   sizing before this. */
 .flux .flux_header .item .title {
 	position: static;
 	display: block;
@@ -720,7 +724,7 @@ img.favicon {
 	min-width: 0;
 	padding: 0;
 	color: var(--fl-text);
-	font-size: 0.95rem;
+	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.35;
 	white-space: normal;
@@ -730,7 +734,7 @@ img.favicon {
 
 .flux.not_read .flux_header .item .title,
 .flux.current .flux_header .item .title {
-	font-weight: 600;
+	font-weight: 650;
 	color: var(--fl-text);
 }
 

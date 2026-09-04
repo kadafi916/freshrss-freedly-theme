@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.5 — 2026-09-04
+
+- Article title sizing measured directly from Feedly's DevTools Computed
+  panel rather than approximated: 16px at weight 650 (InterVariable's
+  fractional weight, not just 600/700) for the unread/current state, up
+  from a guessed 0.95rem/600. First theme value backed by an actual
+  computed-style reading instead of screenshot proportions.
+
 ## 1.1.4 — 2026-09-04
 
 - Sidebar unread-count numbers sized down to 0.75rem, distinctly smaller
