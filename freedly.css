@@ -778,6 +778,51 @@ img.favicon {
 	max-width: none;
 }
 
+/*=== Article panel (normal view) - slides in from the right, Feedly-style */
+/*===========================================================================*/
+/* FreshRSS's "normal" view expands an article inline as an accordion
+   (frss.css: ".hide_posts > .flux:not(.active) > .flux_content
+   {display:none}"). Overriding that to stay in the DOM (off-screen via
+   transform instead of display:none) turns the same click/close logic
+   FreshRSS already runs - clicking a row, clicking a different row,
+   clicking the margin around the article if "close article by clicking
+   its sides" is enabled in Settings -> Reading - into a real slide-in
+   panel with zero custom JS. There's no dedicated close (X) button
+   this way, just those existing interactions; a real Feedly-style X
+   would need this theme to ship a small JS file. */
+#stream.normal.hide_posts .flux > .flux_content {
+	display: block;
+	position: fixed;
+	top: 56px;
+	right: 0;
+	bottom: 0;
+	width: clamp(380px, 58vw, 820px);
+	overflow-y: auto;
+	background-color: var(--fl-bg-raised);
+	border-left: 1px solid var(--fl-border-strong);
+	box-shadow: -12px 0 32px #00000066;
+	transform: translateX(100%);
+	transition: transform 0.25s ease;
+	z-index: 30;
+	pointer-events: none;
+}
+
+#stream.normal.hide_posts .flux.active > .flux_content {
+	transform: translateX(0);
+	pointer-events: auto;
+}
+
+#stream.normal.hide_posts .flux > .flux_content .content {
+	padding: 1.5rem 2rem 2rem;
+}
+
+@media (max-width: 840px) {
+	#stream.normal.hide_posts .flux > .flux_content {
+		width: 100vw;
+		top: 0;
+	}
+}
+
 /*=== Reading pane / reader view */
 /*================================*/
 #stream.reader .flux {

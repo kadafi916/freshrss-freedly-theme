@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0 — 2026-09-04
+
+- Article panel (normal/list view) now slides in from the right instead
+  of expanding inline as an accordion, Feedly-style. Achieved with no
+  custom JS: overrode frss.css's `display:none` on collapsed
+  `.flux_content` to keep it in the DOM off-screen via `transform`
+  instead, so FreshRSS's own existing click/close logic (click a row,
+  click a different row, click the article's margin if "close article
+  by clicking its sides" is enabled) now drives a real slide-in panel.
+  Enabled that "sides_close_article" setting as part of this, since the
+  panel needs it to be closable by clicking its own padding.
+- Known limitation: no dedicated close (✕) button like Feedly's -
+  closing relies on the interactions above. A real X button would need
+  this theme to ship a small JS file (FreshRSS supports that per its
+  theme-writing docs); noted as a possible follow-up, not done here.
+
 ## 1.1.5 — 2026-09-04
 
 - Article title sizing measured directly from Feedly's DevTools Computed

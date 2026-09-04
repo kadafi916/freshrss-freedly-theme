@@ -145,6 +145,15 @@ layout:
 
 ## Known limitations
 
+- **Article panel has no dedicated close (✕) button.** In "normal" view,
+  articles slide in from the right (CSS-only, overriding FreshRSS's
+  inline-accordion default). Closing it relies on FreshRSS's own
+  existing interactions — click the row again, click a different row,
+  or click the panel's own padding if **"close article by clicking its
+  sides"** is enabled under Settings → Reading (this theme turns that on
+  for you). A real Feedly-style X button would need this theme to ship
+  a small JS file, which FreshRSS's theming docs do support — not done
+  here yet.
 - **Dark only.** There's no light variant yet. The theme forces a dark
   palette regardless of FreshRSS's `darkMode` setting or OS preference.
 - **No RTL stylesheet.** FreshRSS falls back to requesting
