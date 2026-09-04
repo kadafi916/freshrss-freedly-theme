@@ -411,6 +411,18 @@ img.favicon {
    on the same element: filter repaints the whole box incl. its own
    background, which is why an earlier "colored badge" version of this
    rendered as a blank white square.) */
+/* FreshRSS draws the ⚠ error marker in two independent places: once on
+   the category folder itself (".title.error::before", generic - matches
+   any category whose name span carries the "error" class) and again on
+   each individual broken feed inside it (".item.feed.error .item-title
+   .title::before", scoped to the feed row). Drop only the former so a
+   folder summary doesn't nag once you already know which feed inside it
+   is the actual problem - the per-feed marker (e.g. next to the actual
+   broken site) stays untouched. */
+.tree-folder-title .title.error::before {
+	content: none;
+}
+
 .tree-folder.category.all > .tree-folder-title .icon,
 .tree-folder.category.important > .tree-folder-title .icon {
 	filter: brightness(0) invert(1) opacity(0.85);

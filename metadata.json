@@ -2,7 +2,7 @@
 	"name": "Feedly",
 	"author": "kadafi916",
 	"description": "A dark theme inspired by Feedly's reading experience: Inter type, a green accent, card-like article rows, and a quieter chrome.",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"files": ["_frss.css", "../Origine/origine.css", "feedly.css"],
 	"theme-color": "#121212"
 }

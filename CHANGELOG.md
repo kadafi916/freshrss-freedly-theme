@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.2 — 2026-09-04
+
+- Hid the category-level ⚠ error marker (shown on a folder like "Apple"
+  when any feed inside it is broken) while keeping the per-feed marker
+  (shown directly on the actual broken feed, e.g. "Redmond Pie") intact.
+  FreshRSS renders these via two independent selectors, so this was a
+  matter of targeting the folder-level one specifically.
+
 ## 1.0.1 — 2026-09-04
 
 - Thumbnails re-sized to Feedly's actual dimensions: 163×98 (landscape),
