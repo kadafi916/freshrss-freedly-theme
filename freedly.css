@@ -364,12 +364,20 @@ img.favicon {
 	border-color: var(--fl-accent-hover);
 }
 
+/* base.css sets category-folder titles at 1rem with a 2.5 line-height -
+   quite large/loose next to Feedly's compact sidebar type. Sized down
+   and tightened; feed rows below already come from Origine at 0.8rem,
+   so just trim their line-height to match the tighter rhythm. */
 .tree-folder-title {
 	background-color: transparent;
 	border-radius: var(--fl-radius-sm);
 	margin: 0.1rem 0.5rem;
+	padding-top: 0.35rem;
+	padding-bottom: 0.35rem;
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
+	font-size: 0.85rem;
+	line-height: 1.8;
 	font-weight: 500;
 	font-style: normal;
 }
@@ -400,6 +408,7 @@ img.favicon {
 	margin: 0.05rem 0.5rem 0.05rem 1rem;
 	font-weight: 400;
 	font-style: normal;
+	line-height: 1.5;
 }
 
 .tree-folder-items > .item > a,
@@ -466,6 +475,22 @@ img.favicon {
 .tree-folder.category.all > .tree-folder-title .icon,
 .tree-folder.category.important > .tree-folder-title .icon {
 	filter: brightness(0) invert(1) opacity(0.85);
+}
+
+/* Match the sidebar's now-smaller type (0.85rem titles) instead of the
+   app-wide default 1rem icon size. img.favicon elsewhere is locked to a
+   fixed 16x16px box (width/min-width/max-width, not just height) to
+   stop it distorting - override all of those together here too, not
+   just height, or it'll squish the same way it did before. */
+.tree-folder-title .icon {
+	height: 0.85rem;
+}
+
+.tree-folder-items .favicon {
+	width: 14px;
+	height: 14px;
+	min-width: 14px;
+	max-width: 14px;
 }
 
 /*=== Nav menu (toolbar above the article list) */

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.3 — 2026-09-04
+
+- Sidebar type sized down to match Feedly's more compact scale.
+  Category-folder titles (`.tree-folder-title`) shipped from base.css
+  at 1rem with a loose 2.5 line-height; sized to 0.85rem/1.8 with
+  tighter vertical padding. Feed rows (already 0.8rem via Origine)
+  got a trimmed line-height (1.7 → 1.5) to match the tighter rhythm.
+  Sidebar icons and favicons scaled down proportionally so they don't
+  look oversized against the smaller text.
+
 ## 1.1.2 — 2026-09-04
 
 - Actually fixed the horizontal line between article rows this time.
