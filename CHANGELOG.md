@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4 — 2026-09-04
+
+- Fixed: favicons could render squished/stretched into a thin sliver
+  after 1.0.3's column-width tightening. Locked `img.favicon` to an
+  explicit 16×16px box with `object-fit: contain` so it can't distort
+  regardless of the surrounding cell width.
+
 ## 1.0.3 — 2026-09-04
 
 - Tightened the read/favorite-toggle icons and the favicon column in the

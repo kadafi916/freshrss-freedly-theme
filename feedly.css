@@ -178,6 +178,11 @@ a:hover, button.as-link:hover {
 
 img.favicon {
 	border-radius: 4px;
+	width: 16px;
+	height: 16px;
+	min-width: 16px;
+	max-width: 16px;
+	object-fit: contain;
 }
 
 /*=== Buttons */
