@@ -368,6 +368,8 @@ img.favicon {
 	margin: 0.1rem 0.5rem;
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
+	font-weight: 500;
+	font-style: normal;
 }
 
 .tree-folder-title:hover {
@@ -376,7 +378,7 @@ img.favicon {
 
 .tree-folder.active .tree-folder-title {
 	background-color: var(--fl-bg-selected);
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .tree-folder.active .tree-folder-title .title {
@@ -388,22 +390,40 @@ img.favicon {
 	border: none;
 }
 
+/* Feed rows default to a dimmer, regular-weight look (Feedly only
+   emphasizes the one you're actually reading) rather than every row
+   competing at the same bold/bright weight as the active one. */
 .tree-folder-items > .item {
 	border-radius: var(--fl-radius-sm);
 	margin: 0.05rem 0.5rem 0.05rem 1rem;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.tree-folder-items > .item > a,
+.tree-folder-items > .item .title {
+	color: var(--fl-text-secondary);
+	font-weight: 400;
+	font-style: normal;
 }
 
 .tree-folder-items .item:hover {
 	background-color: var(--fl-bg-hover);
 }
 
+.tree-folder-items .item:hover > a,
+.tree-folder-items .item:hover .title {
+	color: var(--fl-text);
+}
+
 .tree-folder-items > .item.active {
 	background-color: var(--fl-bg-selected);
 }
 
-.tree-folder-items > .item.active > a {
+.tree-folder-items > .item.active > a,
+.tree-folder-items > .item.active .title {
 	color: var(--fl-text);
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .aside.aside_feed .category .title:not([data-unread="0"])::after,

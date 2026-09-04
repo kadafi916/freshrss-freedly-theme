@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.7 — 2026-09-04
+
+- Sidebar feed list toned down to match Feedly's more restrained look:
+  feed rows now default to regular weight and a dimmer secondary text
+  color, brightening to full text color + medium weight only on hover
+  and for the active feed/category. Previously every row rendered at
+  the same bold/bright weight regardless of selection state.
+
 ## 1.0.6 — 2026-09-04
 
 - Removed green from all link/body text (generic `a` links, in-article
