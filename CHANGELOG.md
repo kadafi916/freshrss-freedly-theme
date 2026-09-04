@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 — 2026-09-04
+
+- Removed the row-separator lines in the article list: the horizontal
+  one (this theme's own `border-top` between rows) and a vertical one
+  between the thumbnail and title that didn't trace back to any rule
+  this theme, Origine, or frss.css set — reset border/outline broadly
+  on the row's flex items rather than leave the source unexplained.
+
 ## 1.1.0 — 2026-09-04
 
 - **Renamed the theme from "Feedly" to "Freedly"** (folder, CSS filename

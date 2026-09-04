@@ -555,8 +555,17 @@ img.favicon {
 }
 
 .flux_header {
-	border-top: 1px solid var(--fl-border);
 	padding: 0 0.5rem;
+}
+
+/* Kill any row-separator lines - the horizontal one above was this
+   theme's own border-top (removed per feedback); the vertical one
+   between thumbnail and title didn't trace back to a rule this theme
+   set (not in Origine/frss.css either), so reset border/outline
+   broadly on the row's flex items rather than leave it unexplained. */
+.flux .flux_header.horizontal-list > .item {
+	border: none;
+	outline: none;
 }
 
 /* FreshRSS lays each row out as a CSS table (thumbnail/title after the
