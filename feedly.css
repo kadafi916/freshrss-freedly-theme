@@ -123,8 +123,11 @@
 	--box-shadow-color: #00000066;
 	--box-shadow-color-inset: #00000040;
 
-	--font-color-link: var(--fl-accent);
-	--font-color-link-hover: var(--fl-accent-hover);
+	/* Feedly reserves its green for controls (buttons, badges, focus
+	   rings, the unread dot) - not for link/body text. Keep ordinary
+	   links neutral rather than tinting them with the accent. */
+	--font-color-link: var(--fl-text);
+	--font-color-link-hover: var(--fl-text-white);
 
 	--border-color: var(--fl-border);
 	--border-color-shadow-side: var(--fl-border);
@@ -169,11 +172,11 @@ html, body {
 }
 
 a, button.as-link {
-	color: var(--fl-accent);
+	color: var(--fl-text);
 }
 
 a:hover, button.as-link:hover {
-	color: var(--fl-accent-hover);
+	color: var(--fl-text-white);
 }
 
 img.favicon {
@@ -282,7 +285,7 @@ img.favicon {
 }
 
 .header > .item.title a:hover::after {
-	color: var(--fl-accent);
+	color: var(--fl-text-white);
 }
 
 .header > .item.search {
@@ -719,8 +722,18 @@ img.favicon {
 	color: var(--fl-text);
 }
 
+/* Body text and link text are now the same color (both neutral, no
+   green) - underline so links stay discoverable inside article prose. */
 .content a {
-	color: var(--fl-accent);
+	color: var(--fl-text);
+	text-decoration: underline;
+	text-decoration-color: var(--fl-border-strong);
+	text-underline-offset: 2px;
+}
+
+.content a:hover {
+	color: var(--fl-text-white);
+	text-decoration-color: var(--fl-text-tertiary);
 }
 
 .content img, .content video {
@@ -769,7 +782,7 @@ img.favicon {
 /*=====================================*/
 #bigMarkAsRead:hover {
 	background-color: var(--fl-bg-hover);
-	color: var(--fl-accent);
+	color: var(--fl-text-white);
 	box-shadow: none;
 }
 

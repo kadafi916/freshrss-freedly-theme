@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.6 — 2026-09-04
+
+- Removed green from all link/body text (generic `a` links, in-article
+  content links, the header wordmark hover, the mark-read footer hover).
+  Feedly reserves its accent green for controls — buttons, badges, focus
+  rings, the unread dot — not for text. Links now render in the same
+  neutral tone as body text; in-article content links pick up an
+  underline so they stay discoverable now that they're not color-coded.
+
 ## 1.0.5 — 2026-09-04
 
 - Moved the read/favorite-toggle icons and favicon from the start of
