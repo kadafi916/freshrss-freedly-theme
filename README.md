@@ -1,42 +1,51 @@
-# Feedly for FreshRSS
+# Freedly
 
-A dark [FreshRSS](https://freshrss.org) theme that borrows Feedly's look and
-feel: real Feedly color tokens, self-hosted Inter type, larger rounded
-thumbnails, and article rows restructured to read like Feedly's list view
-(bold-until-read titles, byline, excerpt) instead of FreshRSS's classic
-colored-sidebar-tree layout.
+A Feedly-inspired dark theme for [FreshRSS](https://freshrss.org). Real
+Feedly color tokens, self-hosted Inter type, larger rounded thumbnails,
+and article rows restructured to read like Feedly's list view (bold-until-
+read titles, byline, excerpt, action icons trailing the title) instead of
+FreshRSS's classic layout.
+
+> **Freedly is an independent, unaffiliated fan theme.** It is not
+> endorsed by, affiliated with, or associated with Feedly in any way —
+> the name is a nod to its inspiration, not a claim of association.
+> Feedly and its trademarks belong to their respective owners.
 
 ![list view](screenshots/list-view.png)
 ![reading pane](screenshots/reader-view.png)
 
-> Screenshots above are from a live install — add your own if you fork this
-> (see [Screenshots](#screenshots) below).
+> Screenshots above are from a live install — add your own if you fork
+> this (see [Screenshots](#screenshots) below).
 
 ## Why this looks like Feedly, specifically
 
 The palette isn't eyeballed — it's pulled from Feedly's own shipped CSS
 (`feedly.com`'s `main.*.css` bundle exposes `--semanticColorBackground*` /
 `--semanticColorBorder*` custom properties for both its light and dark
-themes), and the type is Feedly's actual font: **Inter**, self-hosted here
-as the variable font so there's no external request to a CDN.
+themes), the thumbnail size is Feedly's actual image-resize CDN request
+(163×98, captured from a saved Feedly page's live DOM), and the type is
+Feedly's actual font: **Inter**, self-hosted here as the variable font so
+there's no external request to a CDN.
 
 ## Features
 
 - Dark palette matching Feedly's real tokens (`#121212` base, `#2bb24c`
-  accent green, layered `#1a1a1a`/`#202020`/`#262626`/`#333333` surface
-  levels).
-- Self-hosted `InterVariable` (roman + italic), the same font Feedly ships.
-- Article rows restructured: rounded ~108px thumbnails (up from FreshRSS's
-  default 80px), title/byline/excerpt stacked instead of absolutely
-  positioned, unread titles bold and full-brightness, read titles dimmed —
-  mirroring how Feedly signals read state instead of a colored border.
-- Rounded, ghost-style icon buttons in the toolbar and header; pill-shaped
-  search box.
-- Sidebar nav with rounded active/hover pills.
-- Reading pane rendered as an elevated rounded card with a comfortable
-  measure instead of edge-to-edge text.
-- Muted (not alarm-red) styling for FreshRSS's real feed-error indicator,
-  so it stays informative without shouting.
+  accent green reserved for controls only — buttons, badges, focus rings
+  — never for link/body text, matching how Feedly actually uses it).
+- Self-hosted `InterVariable` (roman + italic).
+- Article rows restructured: rounded 163×98 thumbnails, title/byline/
+  excerpt stacked instead of absolutely positioned, unread titles bold
+  and full-brightness, read titles dimmed, and the read/favorite/favicon
+  icons moved to trail the title instead of leading the row.
+- Rounded, ghost-style icon buttons in the toolbar and header; pill-
+  shaped search box.
+- Sidebar nav toned to Feedly's restraint: rows default to a dimmer,
+  regular-weight look and only brighten on hover or when active, rather
+  than every row competing at the same weight.
+- Reading pane rendered as an elevated card with a comfortable measure.
+- Muted (not alarm-red) styling for FreshRSS's per-feed error indicator;
+  the noisier folder-level summary indicator is hidden entirely while the
+  per-feed one (which tells you exactly which feed is broken) stays.
 
 ## Requirements
 
@@ -44,49 +53,78 @@ as the variable font so there's no external request to a CDN.
   versions since it only relies on documented theme hooks).
 - FreshRSS's built-in **Origine** theme must be present (it ships by
   default with every FreshRSS install) — this theme layers on top of it
-  rather than redefining structural CSS from scratch.
+  rather than redefining structural CSS from scratch, the same approach
+  FreshRSS's own official Dark/Nord themes use.
 
 ## Installation
 
-FreshRSS themes are just a folder under `FreshRSS/p/themes/<Name>/` picked
-up from `metadata.json`. Pick whichever install method matches your setup.
+FreshRSS themes are a folder under `FreshRSS/p/themes/<Name>/` picked up
+from a `metadata.json` inside it — see FreshRSS's own
+[theming docs](https://freshrss.github.io/FreshRSS/en/admins/11_Themes.html)
+and [theme-writing guide](https://freshrss.github.io/FreshRSS/en/developers/04_Frontend/02_Design.html)
+for the general mechanism this follows.
 
-### Plain install
+> **FreshRSS's own docs note that custom themes aren't officially
+> supported and can be overwritten when FreshRSS updates**, unless
+> they live outside the path FreshRSS's own files get replaced from.
+> Both install methods below account for that — the plain install by
+> reminding you to keep a copy elsewhere, the Docker method by bind-
+> mounting from outside the container entirely.
 
-1. Copy (or clone) this repository's contents into
-   `FreshRSS/p/themes/Feedly/` inside your FreshRSS install, e.g.:
+### Option A: plain install
+
+1. Clone (or download and extract) this repository directly into
+   `FreshRSS/p/themes/Freedly/`:
    ```sh
-   git clone https://github.com/<you>/freshrss-feedly-theme.git \
-     /path/to/FreshRSS/p/themes/Feedly
+   git clone https://github.com/kadafi916/freshrss-freedly-theme.git \
+     /path/to/FreshRSS/p/themes/Freedly
    ```
-2. Make sure the files are readable by your web server user (commonly
-   `www-data`):
+2. Make it readable by your web server user (commonly `www-data`):
    ```sh
-   chown -R www-data:www-data /path/to/FreshRSS/p/themes/Feedly
+   chown -R www-data:www-data /path/to/FreshRSS/p/themes/Freedly
    ```
-3. In FreshRSS, go to **Settings → Display** and pick **Feedly** as the
-   theme.
+3. In FreshRSS: **Settings → Display → Theme → Freedly**.
+4. Keep the clone (or this repo) somewhere outside the FreshRSS install
+   too, since an update could overwrite `p/themes/Freedly/` directly.
 
-### Docker (bind mount, survives image updates)
+### Option B: Docker (bind mount, survives image updates)
 
-If FreshRSS runs in Docker and you don't want the theme to disappear the
-next time the container is recreated (e.g. on an image update), clone this
-repo to a persistent path on the host and bind-mount it over the theme
-directory instead of copying into the container's writable layer:
+Clone to a persistent path on the Docker **host** (not inside the
+container), then bind-mount it over the theme directory instead of
+copying into the container's writable layer — this is the pattern
+[FreshRSS's own docs recommend](https://freshrss.github.io/FreshRSS/en/admins/11_Themes.html)
+for Docker specifically:
 
 ```sh
-git clone https://github.com/<you>/freshrss-feedly-theme.git \
-  /path/to/persistent/theme-feedly
+git clone https://github.com/kadafi916/freshrss-freedly-theme.git \
+  /path/to/persistent/theme-freedly
 ```
 
 Add a volume to your `docker run` / compose file:
 
-```
--v /path/to/persistent/theme-feedly:/var/www/FreshRSS/p/themes/Feedly
+```sh
+-v /path/to/persistent/theme-freedly:/var/www/FreshRSS/p/themes/Freedly
 ```
 
-then recreate the container so the mount takes effect. Select **Feedly**
-under **Settings → Display** as above.
+Recreate the container so the mount takes effect, then in FreshRSS:
+**Settings → Display → Theme → Freedly**.
+
+<details>
+<summary>Full example <code>docker run</code> command</summary>
+
+```sh
+docker run -d --restart unless-stopped \
+  -p 8080:80 \
+  -v /path/to/freshrss/data:/var/www/FreshRSS/data \
+  -v /path/to/freshrss/extensions:/var/www/FreshRSS/extensions \
+  -v /path/to/persistent/theme-freedly:/var/www/FreshRSS/p/themes/Freedly \
+  --name freshrss \
+  freshrss/freshrss
+```
+
+Only the last `-v` line is specific to this theme — the rest is a
+standard FreshRSS container; adapt paths/ports to your existing setup.
+</details>
 
 ## Recommended FreshRSS settings
 
@@ -97,48 +135,59 @@ layout:
 - **Display an excerpt of the article** (`topline_summary`) — off by
   default in FreshRSS; turning it on is what makes the gray preview text
   under each title appear (this is a FreshRSS content setting, not
-  something the theme can turn on by itself). Note some feeds simply don't
+  something the theme can turn on by itself). Some feeds simply don't
   publish a description in their RSS, so a few entries may still show no
   excerpt regardless of this setting.
-- **Thumbnail shape** (`topline_thumbnail`) — set to **Landscape** for the
-  closest match. The theme's default sizing (163×98) is Feedly's actual
-  magazine-view thumbnail dimension, captured from its own image-resize
-  CDN request; Square/Portrait are scaled proportionally from the same
-  baseline if you prefer those instead.
+- **Thumbnail shape** (`topline_thumbnail`) → **Landscape**. The theme's
+  163×98 sizing is Feedly's actual magazine-view thumbnail dimension;
+  Square/Portrait scale proportionally from the same baseline if you
+  prefer those instead, but only Landscape reproduces Feedly's crop.
 
 ## Known limitations
 
 - **Dark only.** There's no light variant yet. The theme forces a dark
   palette regardless of FreshRSS's `darkMode` setting or OS preference.
 - **No RTL stylesheet.** FreshRSS falls back to requesting
-  `feedly.rtl.css` for right-to-left languages, which this theme doesn't
-  ship; RTL users will get an unstyled/missing stylesheet for the
-  theme-specific layer. Contributions welcome.
+  `freedly.rtl.css` for right-to-left languages, which this theme
+  doesn't ship. FreshRSS's own theme-writing guide recommends generating
+  RTL variants with [CSSJanus](https://github.com/cssjanus/cssjanus) via
+  `make rtl` in the FreshRSS repo — a PR adding `freedly.rtl.css` that
+  way would be very welcome.
 - Sidebar/toolbar icon glyphs are FreshRSS's own icon set (recolored via
   CSS filters), not Feedly's actual iconography — a pixel-exact icon set
   swap was out of scope.
+- Title/byline/excerpt font *sizes* approximate Feedly's proportions
+  rather than matching exactly — Feedly sets that sizing through
+  runtime-injected CSS-in-JS that isn't visible in a saved page's source,
+  unlike the color tokens and thumbnail dimension above. Exact values
+  would need to come from a browser's DevTools Computed panel.
 
 ## Screenshots
 
 Add your own under `screenshots/` and reference them from the top of this
-README (`list-view.png`, `reader-view.png` are just suggested names).
+README (`list-view.png`, `reader-view.png` are just suggested names). The
+`thumbs/original.png` FreshRSS uses in its own theme picker (Settings →
+Display) is a placeholder card — replace it with a real UI screenshot at
+roughly the same size (1900×920) for a proper preview there.
 
 ## Credits
 
-- Color tokens sourced from Feedly's own production CSS
-  (`feedly.com` / `s1.feedly.com`).
+- Color tokens and thumbnail dimensions sourced from Feedly's own
+  production CSS and CDN requests (`feedly.com` / `s1.feedly.com` /
+  `visuals.feedly.com`).
 - [Inter](https://rsms.me/inter/) by Rasmus Andersson and the Inter
   Project Authors, licensed under the
   [SIL Open Font License 1.1](fonts/LICENSE-OFL.txt).
 - Built on top of FreshRSS's **Origine** theme by Marien Fressinaud, and
   the **Dark**/**Nord** community themes, which this theme's layering
   approach (`_frss.css` → `Origine/origine.css` → theme CSS) follows.
-- [FreshRSS](https://freshrss.org) itself.
+- [FreshRSS](https://freshrss.org) itself, and its
+  [theme-writing documentation](https://freshrss.github.io/FreshRSS/en/developers/04_Frontend/02_Design.html).
 
 ## License
 
-This theme's original code (`feedly.css`, `metadata.json`, this README) is
-licensed under the [MIT License](LICENSE).
+This theme's original code (`freedly.css`, `metadata.json`, this README)
+is licensed under the [MIT License](LICENSE).
 
 The bundled font (`fonts/InterVariable*.woff2`) is licensed separately
 under the [SIL Open Font License 1.1](fonts/LICENSE-OFL.txt) — it is
@@ -146,5 +195,5 @@ under the [SIL Open Font License 1.1](fonts/LICENSE-OFL.txt) — it is
 redistribute them.
 
 Feedly itself, its name, and its trademarks are the property of their
-respective owners; this project is an independent, unaffiliated fan theme
-and is not endorsed by or affiliated with Feedly.
+respective owners; this project is an independent, unaffiliated fan
+theme and is not endorsed by or affiliated with Feedly.

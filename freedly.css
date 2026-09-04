@@ -1,14 +1,16 @@
 @charset "UTF-8";
 
 /*
- * Feedly theme for FreshRSS
+ * Freedly - a Feedly-inspired theme for FreshRSS
  * Builds on top of _frss.css (structure) + Origine/origine.css (the
  * polish layer: rounded corners, shadows, spacing) and re-skins colors,
  * type, and a few structural bits to read like Feedly's dark web app.
  *
  * Real color tokens were pulled from Feedly's own shipped CSS
  * (--semanticColorBackground*/--semanticColorBorder* custom properties)
- * so the palette matches, not just approximates.
+ * so the palette matches, not just approximates. "Freedly" is an
+ * independent, unaffiliated fan theme - not endorsed by or affiliated
+ * with Feedly.
  */
 
 /*=== Font (self-hosted, same variable font Feedly itself ships) */

@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.1.0 — 2026-09-04
+
+- **Renamed the theme from "Feedly" to "Freedly"** (folder, CSS filename
+  `feedly.css` → `freedly.css`, `metadata.json` name field, install
+  paths) to be clear this is an independent fan theme, not the actual
+  Feedly product — the README now states that explicitly.
+- Added the `thumbs/original.png` preview image FreshRSS's theme picker
+  (Settings → Display) expects — previously missing entirely. It's a
+  placeholder card for now; see the Screenshots section of the README.
+- Rewrote the README's install instructions around FreshRSS's own
+  theming docs and Docker guidance, including the official warning that
+  custom themes can be overwritten on update, and documented the
+  official `make rtl` / CSSJanus path for anyone who wants to contribute
+  an RTL stylesheet (not shipped yet).
+- Fixed version drift: `metadata.json`'s `version` field on the live
+  install had been stuck at the initial `1.0` release value since 1.0.1
+  — each release since had bumped it in this repo but never re-deployed
+  that specific file. Now in sync.
+
 ## 1.0.8 — 2026-09-04
 
 - Suppressed the underline that appeared on a sidebar feed/category link

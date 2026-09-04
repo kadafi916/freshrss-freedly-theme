@@ -22,6 +22,6 @@ SOFTWARE.
 
 ---
 
-This license covers the theme's original code (feedly.css, metadata.json,
+This license covers the theme's original code (freedly.css, metadata.json,
 and this repository's documentation). It does NOT cover the bundled Inter
 font, which is distributed under its own license — see fonts/LICENSE-OFL.txt.
