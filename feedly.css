@@ -1,0 +1,714 @@
+@charset "UTF-8";
+
+/*
+ * Feedly theme for FreshRSS
+ * Builds on top of _frss.css (structure) + Origine/origine.css (the
+ * polish layer: rounded corners, shadows, spacing) and re-skins colors,
+ * type, and a few structural bits to read like Feedly's dark web app.
+ *
+ * Real color tokens were pulled from Feedly's own shipped CSS
+ * (--semanticColorBackground*/--semanticColorBorder* custom properties)
+ * so the palette matches, not just approximates.
+ */
+
+/*=== Font (self-hosted, same variable font Feedly itself ships) */
+/*===============================================================*/
+@font-face {
+	font-family: 'InterVariable';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('fonts/InterVariable.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'InterVariable';
+	font-style: italic;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('fonts/InterVariable-Italic.woff2') format('woff2');
+}
+
+/*=== Palette */
+/*============*/
+:root {
+	color-scheme: dark;
+
+	/* Feedly dark tokens */
+	--fl-bg: #121212;
+	--fl-bg-raised: #1a1a1a;
+	--fl-bg-elevated: #202020;
+	--fl-bg-hover: #262626;
+	--fl-bg-selected: #333333;
+	--fl-border: #262626;
+	--fl-border-strong: #333333;
+	--fl-text: #e6e6e6;
+	--fl-text-white: #ffffff;
+	--fl-text-secondary: #9e9e9e;
+	--fl-text-tertiary: #757575;
+	--fl-accent: #2bb24c;
+	--fl-accent-hover: #40ba5e;
+	--fl-accent-active: #228e3d;
+	--fl-accent-bg: #11471e;
+	--fl-accent-bg-light: #0b2d13;
+	--fl-danger: #f44336;
+	--fl-danger-bg: #3d110e;
+	--fl-warning: #ff9800;
+	--fl-warning-bg: #402600;
+	--fl-error-muted: #c9884c; /* softer than pure red for the feed-error ⚠ marker */
+	--fl-info: #3979cc;
+	--fl-radius-sm: 6px;
+	--fl-radius-md: 10px;
+	--fl-radius-lg: 14px;
+
+	/* --- Map onto Origine's variable system --- */
+	--background-color-light-gradient1: var(--fl-bg-elevated);
+	--background-color-light-gradient2: var(--fl-bg-elevated);
+	--background-color-light: var(--fl-bg);
+	--background-color-light-shadowed: var(--fl-bg-raised);
+	--background-color-light-shadowed-transparent: #1a1a1acc;
+	--background-color-grey: var(--fl-bg-raised);
+	--background-color-hover: var(--fl-bg-hover);
+
+	--unread-article-background-color: transparent;
+	--unread-article-background-color-hover: var(--fl-bg-hover);
+	--unread-article-border-color: transparent;
+	--favorite-article-background-color: transparent;
+	--favorite-article-background-color-hover: var(--fl-bg-hover);
+	--favorite-article-border-color: transparent;
+
+	--contrast-background-color: var(--fl-accent);
+	--contrast-background-color-gradient: var(--fl-accent);
+	--contrast-background-color-hover: var(--fl-accent-hover);
+	--contrast-background-color-active: var(--fl-accent-active);
+	--contrast-border-color: var(--fl-accent);
+	--contrast-border-color-active: var(--fl-accent);
+	--contrast-background-font-color: #ffffff;
+
+	--attention-background-color-gradient1: var(--fl-danger);
+	--attention-background-color-gradient2: #a33329;
+	--attention-background-color-gradient1-hover: #ff5c4f;
+	--attention-background-color-gradient2-hover: #c3362b;
+	--attention-background-color-active: #a33329;
+	--attention-border-color: var(--fl-danger);
+
+	--empty-feed-color: var(--fl-warning);
+	--error-feed-color: var(--fl-error-muted);
+
+	--alert-warn-background-color: var(--fl-warning-bg);
+	--alert-warn-font-color: #ffefb6;
+	--alert-warn-border-color: #665105;
+	--alert-success-background-color: var(--fl-accent-bg-light);
+	--alert-success-font-color: #bfe8c9;
+	--alert-success-border-color: var(--fl-accent);
+	--alert-error-background-color: var(--fl-danger-bg);
+	--alert-error-font-color: #fcc7c3;
+	--alert-error-boder-color: var(--fl-danger);
+
+	--notification-good-background-color: var(--fl-bg-elevated);
+	--notification-good-border-color: var(--fl-accent);
+	--notification-good-font-color: var(--fl-text);
+	--notification-bad-background-color: var(--fl-bg-elevated);
+	--notification-bad-font-color: #fcc7c3;
+	--notification-bad-border-color: var(--fl-danger);
+	--notification-close-background-color-hover: var(--fl-bg-hover);
+
+	--font-color: var(--fl-text);
+	--font-color-grey: var(--fl-text-secondary);
+	--font-color-light-shadowed: var(--fl-text-tertiary);
+	--font-color-light: var(--fl-text-white);
+
+	--text-shadow-color: transparent;
+	--text-shadow-color-dark: transparent;
+	--box-shadow-color: #00000066;
+	--box-shadow-color-inset: #00000040;
+
+	--font-color-link: var(--fl-accent);
+	--font-color-link-hover: var(--fl-accent-hover);
+
+	--border-color: var(--fl-border);
+	--border-color-shadow-side: var(--fl-border);
+	--frss-border-color: var(--fl-border);
+
+	--form-element-font-color-focus: var(--fl-text);
+	--form-element-border-color-focus: var(--fl-accent);
+	--form-element-focus-box-shadow-color-inset: transparent;
+	--form-element-border-color-invalid: var(--fl-danger);
+	--form-element-invalid-box-shadow-color-inset: transparent;
+
+	/* --- frss.css base vars --- */
+	--frss-font-color-dark: var(--fl-text);
+	--frss-font-color-grey-dark: var(--fl-text-secondary);
+	--frss-font-color-grey-light: var(--fl-text-tertiary);
+	--frss-font-color-light: var(--fl-text-white);
+	--frss-font-color-disabled: var(--fl-text-tertiary);
+	--frss-font-color-error: var(--fl-error-muted);
+	--frss-background-color: var(--fl-bg);
+	--frss-background-color-transparent: #121212cc;
+	--frss-background-color-middle: var(--fl-bg-raised);
+	--frss-background-color-dark: var(--fl-bg-selected);
+	--frss-noThumbnailImage-background-color: var(--fl-bg-elevated);
+	--frss-darken-background-hover-transparent: #ffffff14;
+	--frss-modal-background-color-transparent: #000000b3;
+	--frss-box-shadow-color-transparent: #00000066;
+	--frss-scrollbar-handle: #ffffff26;
+	--frss-scrollbar-handle-hover: #ffffff40;
+	--frss-scrollbar-track: transparent;
+	--frss-scrollbar-track-hover: transparent;
+}
+
+html, body {
+	background-color: var(--fl-bg);
+	color: var(--fl-text);
+	font-family: 'InterVariable', Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+::selection {
+	background: var(--fl-accent-bg);
+	color: var(--fl-text-white);
+}
+
+a, button.as-link {
+	color: var(--fl-accent);
+}
+
+a:hover, button.as-link:hover {
+	color: var(--fl-accent-hover);
+}
+
+img.favicon {
+	border-radius: 4px;
+}
+
+/*=== Buttons */
+/*============*/
+.btn {
+	background-image: none;
+	background-color: var(--fl-bg-elevated);
+	color: var(--fl-text-secondary);
+	border: 1px solid var(--fl-border-strong);
+	border-radius: var(--fl-radius-sm);
+}
+
+.btn:hover {
+	background-image: none;
+	background-color: var(--fl-bg-hover);
+	color: var(--fl-text);
+}
+
+.btn.active,
+.btn:active,
+.dropdown-target:target ~ .btn.dropdown-toggle {
+	background-color: var(--fl-bg-selected);
+	box-shadow: none;
+	filter: none;
+}
+
+.btn-important {
+	background-image: none;
+	background-color: var(--fl-accent);
+	color: #fff;
+	border-color: var(--fl-accent);
+	font-weight: 600;
+}
+
+.btn-important:hover {
+	background-image: none;
+	background-color: var(--fl-accent-hover);
+	border-color: var(--fl-accent-hover);
+}
+
+.btn-important:active {
+	background-color: var(--fl-accent-active);
+}
+
+.btn-important .icon,
+.btn-important:hover .icon {
+	filter: brightness(0) invert(1);
+}
+
+/*=== Dropdowns */
+/*==============*/
+.dropdown-menu {
+	background-color: var(--fl-bg-elevated);
+	border: 1px solid var(--fl-border-strong);
+	border-radius: var(--fl-radius-md);
+	box-shadow: 0 12px 28px #00000080;
+}
+
+.dropdown-menu::after {
+	background-color: var(--fl-bg-elevated);
+}
+
+/*=== Header (top bar) */
+/*======================*/
+.header {
+	height: 56px;
+	background-color: var(--fl-bg);
+	border-bottom: 1px solid var(--fl-border);
+}
+
+.header > .item {
+	box-shadow: none;
+}
+
+.header > .item.title {
+	width: 300px;
+	text-align: left;
+}
+
+.header > .item.title a {
+	padding: 0 1.25rem;
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.header > .item.title img.logo {
+	display: none;
+}
+
+.header > .item.title a::after {
+	content: 'FreshRSS';
+	font-weight: 700;
+	font-size: 0.95rem;
+	letter-spacing: -0.01em;
+	color: var(--fl-text);
+}
+
+.header > .item.title a:hover::after {
+	color: var(--fl-accent);
+}
+
+.header > .item.search {
+	text-align: left;
+}
+
+.header > .item.search .stick {
+	max-width: 320px;
+}
+
+.header > .item.search input[type="search"] {
+	background-color: var(--fl-bg-elevated);
+	color: var(--fl-text);
+	border: 1px solid transparent;
+	border-radius: 999px 0 0 999px;
+	padding: 0.5rem 0.9rem;
+}
+
+.header > .item.search input[type="search"]:focus {
+	border-color: var(--fl-accent);
+	box-shadow: none;
+}
+
+.header > .item.search .btn {
+	border-radius: 0 999px 999px 0;
+	background-color: var(--fl-bg-elevated);
+	border: 1px solid transparent;
+	border-left: 1px solid var(--fl-border-strong);
+}
+
+.header > .item.configure {
+	width: 64px;
+	text-align: right;
+	padding-right: 0.75rem;
+}
+
+.header > .item.configure .dropdown-toggle {
+	border: none;
+	background-color: transparent;
+	border-radius: 50%;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
+}
+
+.header > .item.configure .dropdown-toggle:hover {
+	background-color: var(--fl-bg-hover);
+}
+
+/*=== Sidebar */
+/*============*/
+.aside, .aside.aside_feed {
+	background-color: var(--fl-bg);
+	border-right: 1px solid var(--fl-border);
+}
+
+.stick.configure-feeds {
+	padding: 0.5rem 0.75rem;
+}
+
+.stick.configure-feeds .btn {
+	border-radius: 999px;
+}
+
+#btn-subscription, #btn-add {
+	background-color: var(--fl-accent);
+	border-color: var(--fl-accent);
+	color: #fff;
+	font-weight: 600;
+}
+
+#btn-subscription:hover, #btn-add:hover {
+	background-color: var(--fl-accent-hover);
+	border-color: var(--fl-accent-hover);
+}
+
+.tree-folder-title {
+	background-color: transparent;
+	border-radius: var(--fl-radius-sm);
+	margin: 0.1rem 0.5rem;
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+}
+
+.tree-folder-title:hover {
+	background-color: var(--fl-bg-hover);
+}
+
+.tree-folder.active .tree-folder-title {
+	background-color: var(--fl-bg-selected);
+	font-weight: 600;
+}
+
+.tree-folder.active .tree-folder-title .title {
+	color: var(--fl-text);
+}
+
+.tree-folder-items {
+	background-color: transparent;
+	border: none;
+}
+
+.tree-folder-items > .item {
+	border-radius: var(--fl-radius-sm);
+	margin: 0.05rem 0.5rem 0.05rem 1rem;
+}
+
+.tree-folder-items .item:hover {
+	background-color: var(--fl-bg-hover);
+}
+
+.tree-folder-items > .item.active {
+	background-color: var(--fl-bg-selected);
+}
+
+.tree-folder-items > .item.active > a {
+	color: var(--fl-text);
+	font-weight: 600;
+}
+
+.aside.aside_feed .category .title:not([data-unread="0"])::after,
+.aside.aside_feed .feed .item-title:not([data-unread="0"])::after {
+	background-color: transparent;
+	color: var(--fl-text-tertiary);
+}
+
+/* "all" and "important" ship as dark-gray glyphs (#66666f/#666), invisible
+   on a near-black sidebar, so lighten them. "favorites" ships as a gold
+   star (#f1c40f) that already reads well here, so it's left untouched
+   rather than fighting it. (Do not pair `filter` with `background-color`
+   on the same element: filter repaints the whole box incl. its own
+   background, which is why an earlier "colored badge" version of this
+   rendered as a blank white square.) */
+.tree-folder.category.all > .tree-folder-title .icon,
+.tree-folder.category.important > .tree-folder-title .icon {
+	filter: brightness(0) invert(1) opacity(0.85);
+}
+
+/*=== Nav menu (toolbar above the article list) */
+/*================================================*/
+.nav_menu {
+	background-color: var(--fl-bg);
+	border-bottom: 1px solid var(--fl-border);
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.nav_menu .btn,
+.nav_menu .dropdown-toggle {
+	background-color: transparent;
+	border: none;
+	border-radius: 999px;
+	min-width: 2.25rem;
+	min-height: 2.25rem;
+	padding: 0.4rem 0.6rem;
+}
+
+.nav_menu .btn:hover,
+.nav_menu .dropdown-toggle:hover {
+	background-color: var(--fl-bg-hover);
+}
+
+.nav_menu .btn.active,
+.nav_menu .btn:active,
+.nav_menu .dropdown-target:target ~ .btn.dropdown-toggle {
+	background-color: var(--fl-accent-bg-light);
+	box-shadow: none;
+}
+
+.nav_menu .btn.active .icon,
+.nav_menu .btn:active .icon {
+	filter: none;
+}
+
+/*=== Article list rows */
+/*=======================*/
+.flux {
+	background-color: var(--fl-bg);
+	border-left: none;
+	margin-left: 0;
+}
+
+.flux.current {
+	background-color: var(--fl-bg);
+	border-left: none;
+}
+
+.flux.current > .flux_header {
+	background: var(--fl-bg-hover);
+	margin-left: 0;
+}
+
+/* Origine draws a 2px colored border-left on every unread/starred row
+   (".flux.not_read"/".flux.favorite" - two classes) which outranks a
+   plain ".flux" reset (one class) on specificity regardless of load
+   order, and stacked back-to-back rows read as one solid vertical line.
+   Match its exact selectors (incl. the .current combos, which use an
+   even-more-specific gradient trick for the same effect) to kill it. */
+.flux.not_read,
+.flux.favorite,
+.flux.not_read.current,
+.flux.favorite.current {
+	border-left: none;
+}
+
+.flux.not_read.current > .flux_header,
+.flux.not_read.current > .flux_header:hover,
+.flux.favorite.current > .flux_header,
+.flux.favorite.current > .flux_header:hover {
+	background: var(--fl-bg-hover);
+	margin-left: 0;
+}
+
+.flux.not_read > .flux_header,
+.flux.favorite > .flux_header {
+	background-color: transparent;
+}
+
+.flux .flux_header:hover,
+.flux:not(.current):hover .flux_header {
+	background-color: var(--fl-bg-hover);
+}
+
+.flux_header {
+	border-top: 1px solid var(--fl-border);
+	padding: 0 0.5rem;
+}
+
+.flux .item.website {
+	width: 130px;
+}
+
+.flux .item.website .websiteName,
+.flux .item.website .item-element {
+	color: var(--fl-text-tertiary);
+	font-size: 0.75rem;
+}
+
+.flux .flux_header .item.manage .item-element,
+.flux .flux_header .item.share .dropdown-toggle,
+.flux .flux_header .item.link .item-element {
+	color: var(--fl-text-tertiary);
+}
+
+/* Feedly's list thumbnails run noticeably bigger than FreshRSS's defaults
+   (60-128px depending on portrait/square/landscape, 40-80px tall) — scale
+   every variant up ~35-40% rather than just the one this account happens
+   to use, so it still looks right if the thumbnail-shape setting changes. */
+.flux .flux_header .item.thumbnail {
+	padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+	height: 108px;
+}
+
+.flux .flux_header .item.thumbnail.small {
+	height: 64px;
+}
+
+.flux .flux_header .item.thumbnail.portrait {
+	width: 80px;
+}
+
+.flux .flux_header .item.thumbnail.square {
+	width: 108px;
+}
+
+.flux .flux_header .item.thumbnail.landscape {
+	width: 168px;
+}
+
+.flux .flux_header .item.thumbnail.portrait.small {
+	width: 48px;
+}
+
+.flux .flux_header .item.thumbnail.square.small {
+	width: 64px;
+}
+
+.flux .flux_header .item.thumbnail.landscape.small {
+	width: 96px;
+}
+
+.flux .flux_header .item.thumbnail img {
+	border-radius: var(--fl-radius-sm);
+}
+
+.flux .flux_header .item.titleAuthorSummaryDate {
+	padding: 0.75rem 0.75rem 0.75rem 0;
+}
+
+.flux .flux_header .item .title {
+	position: static;
+	display: block;
+	max-width: none;
+	min-width: 0;
+	padding: 0;
+	color: var(--fl-text);
+	font-size: 0.95rem;
+	font-weight: 400;
+	line-height: 1.35;
+	white-space: normal;
+	overflow: visible;
+	text-overflow: clip;
+}
+
+.flux.not_read .flux_header .item .title,
+.flux.current .flux_header .item .title {
+	font-weight: 600;
+	color: var(--fl-text);
+}
+
+.flux:not(.not_read):not(.current) .flux_header .item .title {
+	color: var(--fl-text-secondary);
+}
+
+.flux .flux_header.has-date .item .title {
+	padding-right: 0;
+}
+
+.flux .flux_header .item .title .author {
+	display: block;
+	padding-left: 0;
+	margin-top: 0.15rem;
+	color: var(--fl-text-tertiary);
+	font-size: 0.8rem;
+	font-weight: 400;
+}
+
+.flux .flux_header .item .date {
+	position: static;
+	display: block;
+	width: auto;
+	text-align: left;
+	margin-top: 0.35rem;
+	color: var(--fl-text-tertiary);
+	font-size: 0.75rem;
+}
+
+.flux .flux_header .item .summary {
+	position: static;
+	margin-top: 0.35rem;
+	margin-bottom: 0;
+	color: var(--fl-text-secondary);
+	font-size: 0.85rem;
+	line-height: 1.45;
+}
+
+.flux .flux_header.has-date .item .summary {
+	max-width: none;
+}
+
+/*=== Reading pane / reader view */
+/*================================*/
+#stream.reader .flux {
+	background-color: var(--fl-bg);
+}
+
+#stream.reader .flux .flux_content {
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: 2.5rem 3rem;
+	background-color: var(--fl-bg-raised);
+	border: none;
+	border-radius: var(--fl-radius-lg);
+}
+
+#stream.reader .flux .author {
+	color: var(--fl-text-tertiary);
+}
+
+.content {
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: var(--fl-text);
+}
+
+.content a {
+	color: var(--fl-accent);
+}
+
+.content img, .content video {
+	border-radius: var(--fl-radius-sm);
+}
+
+.content pre, .content code {
+	background-color: var(--fl-bg-elevated);
+	border-color: var(--fl-border-strong);
+}
+
+.content blockquote {
+	background-color: var(--fl-bg-elevated);
+	border-top-color: var(--fl-border-strong);
+	border-bottom-color: var(--fl-border-strong);
+	color: var(--fl-text-secondary);
+}
+
+/*=== Global view */
+/*=================*/
+.box {
+	background-color: var(--fl-bg-raised);
+	border: 1px solid var(--fl-border);
+	border-radius: var(--fl-radius-md);
+	box-shadow: none;
+}
+
+.box .box-title {
+	background-color: var(--fl-bg-elevated);
+	border-bottom: 1px solid var(--fl-border);
+	border-radius: var(--fl-radius-md) var(--fl-radius-md) 0 0;
+}
+
+.box.category:not([data-unread="0"]) .box-title {
+	background-color: var(--fl-accent-bg);
+}
+
+/*=== Notifications */
+/*===================*/
+.notification {
+	border-radius: var(--fl-radius-sm);
+	box-shadow: 0 8px 24px #00000080;
+}
+
+/*=== "Load more" / mark-read footer */
+/*=====================================*/
+#bigMarkAsRead:hover {
+	background-color: var(--fl-bg-hover);
+	color: var(--fl-accent);
+	box-shadow: none;
+}
+
+#nav_entries {
+	background-color: var(--fl-bg);
+	border-top: 1px solid var(--fl-border);
+}
