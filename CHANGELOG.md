@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 — 2026-09-04
+
+- Tightened the read/favorite-toggle icons and the favicon column in the
+  article list — FreshRSS's default ~40px-wide cells for these left
+  visible gaps between them; narrowed to a snug Feedly-style cluster.
+
 ## 1.0.2 — 2026-09-04
 
 - Hid the category-level ⚠ error marker (shown on a folder like "Apple"

@@ -519,8 +519,29 @@ img.favicon {
 	padding: 0 0.5rem;
 }
 
-.flux .item.website {
-	width: 130px;
+/* Read/favorite toggle + favicon-only "website" column all shipped with
+   generous FreshRSS default padding (40px+ each, meant for a denser
+   classic reader) leaving visible gaps between icons - Feedly clusters
+   these tight together. Width here is scoped to the icon-only variant
+   of the website column (".websiteicon", set when topline_website is
+   "icon") so it doesn't clobber the wider cell needed if that's ever
+   switched to show the feed name instead. */
+.flux .flux_header .item.manage {
+	width: 30px;
+}
+
+.flux .flux_header .item.manage .item-element {
+	padding-left: 0.2rem;
+	padding-right: 0.2rem;
+}
+
+.flux .flux_header.websiteicon .item.website {
+	width: 28px;
+}
+
+.flux .item.website .item-element {
+	padding-left: 0.2rem;
+	padding-right: 0.2rem;
 }
 
 .flux .item.website .websiteName,
