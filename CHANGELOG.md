@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.4 — 2026-09-04
+
+- Sidebar unread-count numbers sized down to 0.75rem, distinctly smaller
+  than the feed/category label next to them (Feedly's counts are subtle,
+  not label-sized). frss.css had them fixed at 0.9rem, which read as
+  merely fine against the old 1rem category titles but became oversized
+  once 1.1.3 sized those titles down to 0.85rem.
+
 ## 1.1.3 — 2026-09-04
 
 - Sidebar type sized down to match Feedly's more compact scale.

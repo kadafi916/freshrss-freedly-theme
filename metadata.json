@@ -2,7 +2,7 @@
 	"name": "Freedly",
 	"author": "kadafi916",
 	"description": "A Feedly-inspired dark theme for FreshRSS: Inter type, a green accent, card-like article rows, and a quieter chrome.",
-	"version": "1.1.3",
+	"version": "1.1.4",
 	"files": ["_frss.css", "../Origine/origine.css", "freedly.css"],
 	"theme-color": "#121212"
 }

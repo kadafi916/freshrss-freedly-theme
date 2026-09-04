@@ -447,10 +447,16 @@ img.favicon {
 	font-weight: 500;
 }
 
+/* frss.css sets these unread-count badges at a fixed 0.9rem, which was
+   fine against the old 1rem category titles but reads oversized now
+   that titles are down to 0.85rem (and always was oversized next to
+   0.8rem feed rows) - Feedly's counts are distinctly smaller than the
+   label next to them, not matching size. */
 .aside.aside_feed .category .title:not([data-unread="0"])::after,
 .aside.aside_feed .feed .item-title:not([data-unread="0"])::after {
 	background-color: transparent;
 	color: var(--fl-text-tertiary);
+	font-size: 0.75rem;
 }
 
 /* "all" and "important" ship as dark-gray glyphs (#66666f/#666), invisible
