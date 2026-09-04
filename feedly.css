@@ -407,6 +407,16 @@ img.favicon {
 	font-style: normal;
 }
 
+/* Sidebar nav rows signal hover with the background pill alone, same as
+   Feedly - not the browser's default underline-a-link-on-hover, which
+   reads as a stray "this is a hyperlink" affordance in a nav context. */
+.tree-folder-title,
+.tree-folder-title:hover,
+.tree-folder-items > .item > a,
+.tree-folder-items > .item > a:hover {
+	text-decoration: none;
+}
+
 .tree-folder-items .item:hover {
 	background-color: var(--fl-bg-hover);
 }

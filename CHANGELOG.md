@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.8 — 2026-09-04
+
+- Suppressed the underline that appeared on a sidebar feed/category link
+  on hover (the browser's default `a:hover` behavior, inherited since
+  nothing overrode it for the tree). Feedly's sidebar signals hover with
+  its background pill alone; sidebar rows now do the same.
+
 ## 1.0.7 — 2026-09-04
 
 - Sidebar feed list toned down to match Feedly's more restrained look:
