@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.3.1 — 2026-09-05
+
+- Darkened the unread-envelope icon from FreshRSS's default bright
+  flat-red (`#e74c3c`) to a more muted `#a33329` via theme icon
+  override (`icons/unread.svg`) — same "stay legible without shouting"
+  treatment already applied to the feed-error indicator.
+- Corrected "Read later" → "Read Later" (the i18n string edit noted in
+  1.3.0's Known Limitations entry).
+
 ## 1.3.0 — 2026-09-05
 
 - Replaced the star/favorite icon with a bookmark ribbon via theme icon

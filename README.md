@@ -51,8 +51,13 @@ there's no external request to a CDN.
   outline when inactive, solid accent green when active, matching
   Feedly's actual "Read Later" bookmark rather than its separate
   (gold) "Favorites" star. Pairs with relabeling FreshRSS's "Favourites"
-  text to "Read later" — see [Known limitations](#known-limitations),
+  text to "Read Later" — see [Known limitations](#known-limitations),
   that part isn't something a theme's `icons`/CSS can do on its own.
+- Unread envelope icon (`icons/unread.svg`) darkened from FreshRSS's
+  default bright flat-red (`#e74c3c`) to a more muted red (`#a33329`,
+  already used elsewhere in the palette) — same reasoning as the
+  feed-error indicator: stay legible as a status color without
+  shouting.
 
 ## Requirements
 
