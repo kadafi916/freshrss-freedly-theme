@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.0 — 2026-09-05
+
+- Replaced the star/favorite icon with a bookmark ribbon via theme icon
+  override (`icons/starred.svg`, `icons/non-starred.svg`) — outline when
+  inactive, solid accent green when active. Matches Feedly's actual
+  "Read Later" bookmark (confirmed against real Feedly screenshots),
+  not its separate gold "Favorites" star — FreshRSS only has the one
+  star/favorite mechanism, so this remaps it toward the Read Later
+  metaphor instead. Applies everywhere the icon is used: the sidebar
+  nav item and the per-article toggle button.
+- Documented (Known limitations) that relabeling "Favourites" to
+  "Read later" requires editing FreshRSS's own translation string
+  directly — not something a theme's icons/CSS can do.
+
 ## 1.2.0 — 2026-09-04
 
 - Article panel (normal/list view) now slides in from the right instead

@@ -46,6 +46,13 @@ there's no external request to a CDN.
 - Muted (not alarm-red) styling for FreshRSS's per-feed error indicator;
   the noisier folder-level summary indicator is hidden entirely while the
   per-feed one (which tells you exactly which feed is broken) stays.
+- FreshRSS's star/favorite icon replaced with a bookmark ribbon (theme
+  icon override, `icons/starred.svg` + `icons/non-starred.svg`) —
+  outline when inactive, solid accent green when active, matching
+  Feedly's actual "Read Later" bookmark rather than its separate
+  (gold) "Favorites" star. Pairs with relabeling FreshRSS's "Favourites"
+  text to "Read later" — see [Known limitations](#known-limitations),
+  that part isn't something a theme's `icons`/CSS can do on its own.
 
 ## Requirements
 
@@ -145,6 +152,14 @@ layout:
 
 ## Known limitations
 
+- **The "Favourites" → "Read later" text isn't part of this theme.**
+  Themes can override icons (see Features above) but not translation
+  strings — that text lives in FreshRSS's own `app/i18n/<lang>/index.php`
+  (the `favorites` key), a core file outside anything a theme ships.
+  Edit it directly if you want the label to match the bookmark icon
+  (`'favorites' => 'Read later (%s)'` for English) — note this edit
+  doesn't survive a FreshRSS image update the way theme files do, since
+  it's not on a bind-mounted path the way `p/themes/` can be.
 - **Article panel has no dedicated close (✕) button.** In "normal" view,
   articles slide in from the right (CSS-only, overriding FreshRSS's
   inline-accordion default). Closing it relies on FreshRSS's own
