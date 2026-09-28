@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.4.0 — 2026-09-28
+
+- Added `content-visibility: auto` (+ `contain-intrinsic-size`) to
+  `.flux` article rows, to fix images going visually wonky after ~4-5
+  "load more" cycles on image-heavy feeds (poster-thumbnail torrent
+  feeds especially) — reproducible regardless of which feed, consistent
+  with the browser's GPU/decoded-image memory budget being exceeded as
+  infinite-scroll keeps appending rows without ever releasing off-screen
+  ones. This tells the browser to skip layout/paint/image-decode for
+  rows once they're off-screen, instead of keeping every loaded
+  thumbnail decoded and painted at once. Diagnosed first: server access
+  logs for the failing session were clean (all 200/304, normal
+  response sizes) and FreshRSS's own load-more JS showed no reentrancy
+  bug, so this isn't a server or core-JS problem — see the private
+  changelog's "load-more images going wonky" entry for the full
+  investigation.
+
 ## 1.3.1 — 2026-09-05
 
 - Darkened the unread-envelope icon from FreshRSS's default bright

@@ -538,7 +538,22 @@ img.favicon {
 
 /*=== Article list rows */
 /*=======================*/
+/* content-visibility: auto tells the browser to skip layout/paint/image
+   decoding entirely for rows that are off-screen, instead of keeping
+   every loaded article's thumbnail decoded and painted at once. Aimed at
+   a real symptom: after ~4-5 "load more" cycles on an image-heavy feed
+   (100s of full-size poster thumbnails piling up in one ever-growing
+   page, since infinite-scroll never removes anything from the DOM),
+   images start rendering wonky - consistent with the browser's GPU/image
+   memory budget for decoded bitmaps being exceeded, not a FreshRSS logic
+   bug (server logs are clean; the JS driving load-more has no reentrancy
+   issue). `contain-intrinsic-size: auto 100px` gives a reasonable
+   fallback row height before first layout, then the browser remembers
+   each row's real measured height afterward, so this doesn't introduce
+   scroll-position jank. */
 .flux {
+	content-visibility: auto;
+	contain-intrinsic-size: auto 100px;
 	background-color: var(--fl-bg);
 	border-left: none;
 	margin-left: 0;
