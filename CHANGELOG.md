@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.4.1 — 2026-09-28
+
+Reverted 1.4.0's `content-visibility: auto` on `.flux` rows, same day it
+shipped: clicking an article to expand it in place rendered only a tiny
+clipped box with an internal scrollbar, overlapping the next row — the
+expanded content was stuck inside the row's old, small "remembered" size
+from when it was collapsed and off-screen, instead of growing to fit. A
+known `content-visibility: auto` gotcha with dynamically-resizing
+content, confirmed by the timing (same-day regression, no other theme
+changes in between) — not worth a more surgical fix (e.g. excluding
+`.flux.current`), since the issue it was addressing turned out to have a
+cleaner, confirmed fix anyway: the original "images go wonky after
+several load-more clicks" problem was a Brave/Chromium GPU
+hardware-acceleration bug on the affected machine, not something this
+stylesheet needed to work around — disabling hardware acceleration fixed
+it directly, no CSS involved.
+
 ## 1.4.0 — 2026-09-28
 
 - Added `content-visibility: auto` (+ `contain-intrinsic-size`) to

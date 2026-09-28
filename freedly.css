@@ -538,22 +538,18 @@ img.favicon {
 
 /*=== Article list rows */
 /*=======================*/
-/* content-visibility: auto tells the browser to skip layout/paint/image
-   decoding entirely for rows that are off-screen, instead of keeping
-   every loaded article's thumbnail decoded and painted at once. Aimed at
-   a real symptom: after ~4-5 "load more" cycles on an image-heavy feed
-   (100s of full-size poster thumbnails piling up in one ever-growing
-   page, since infinite-scroll never removes anything from the DOM),
-   images start rendering wonky - consistent with the browser's GPU/image
-   memory budget for decoded bitmaps being exceeded, not a FreshRSS logic
-   bug (server logs are clean; the JS driving load-more has no reentrancy
-   issue). `contain-intrinsic-size: auto 100px` gives a reasonable
-   fallback row height before first layout, then the browser remembers
-   each row's real measured height afterward, so this doesn't introduce
-   scroll-position jank. */
+/* v1.4.0 added content-visibility: auto here (to stop images rendering
+   wonky after several "load more" cycles on image-heavy feeds by
+   skipping layout/paint/decode for off-screen rows) - reverted in 1.4.1:
+   it caused a worse regression, clipping an article's content into its
+   old (small, collapsed-row) remembered size when expanded in place,
+   rather than growing to fit - a known content-visibility gotcha with
+   dynamically-resizing content, not something worth papering over here.
+   The original wonky-images issue turned out to be a Brave/Chromium GPU
+   hardware-acceleration bug on the affected machine (confirmed by
+   disabling hardware acceleration fixing it directly) rather than
+   something this stylesheet needed to work around at all. */
 .flux {
-	content-visibility: auto;
-	contain-intrinsic-size: auto 100px;
 	background-color: var(--fl-bg);
 	border-left: none;
 	margin-left: 0;
