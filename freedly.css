@@ -793,16 +793,29 @@ img.favicon {
 /*===========================================================================*/
 /* FreshRSS's "normal" view expands an article inline as an accordion
    (frss.css: ".hide_posts > .flux:not(.active) > .flux_content
-   {display:none}"). Overriding that to stay in the DOM (off-screen via
-   transform instead of display:none) turns the same click/close logic
-   FreshRSS already runs - clicking a row, clicking a different row,
-   clicking the margin around the article if "close article by clicking
-   its sides" is enabled in Settings -> Reading - into a real slide-in
-   panel with zero custom JS. There's no dedicated close (X) button
-   this way, just those existing interactions; a real Feedly-style X
-   would need this theme to ship a small JS file. */
+   {display:none}"). Restyling the *active* row's content as a fixed
+   panel turns the same click/close logic FreshRSS already runs -
+   clicking a row, clicking a different row, clicking the margin around
+   the article if "close article by clicking its sides" is enabled in
+   Settings -> Reading - into a real slide-in panel with zero custom JS.
+   There's no dedicated close (X) button this way, just those existing
+   interactions; a real Feedly-style X would need this theme to ship a
+   small JS file.
+
+   Non-active rows MUST stay display:none. Before 1.5.0 every loaded
+   row's content was kept display:block, parked off-screen with
+   transform - so every loaded article became its own full-height,
+   box-shadowed GPU compositor layer, and because those panels sat just
+   past the right edge the browser's lazy-loader treated them as "near
+   the viewport" and decoded every article's full-size body images too.
+   That scaled with every "load more" and corrupted image rendering
+   after ~4-5 of them (GPU texture memory exhausted; hidden when
+   hardware acceleration was off). The slide-in animation is kept via
+   @starting-style (entry) and transition-behavior: allow-discrete
+   (keeps display:block until the slide-out finishes); browsers without
+   those just show/hide instantly. */
 #stream.normal.hide_posts .flux > .flux_content {
-	display: block;
+	display: none;
 	position: fixed;
 	top: 56px;
 	right: 0;
@@ -813,14 +826,21 @@ img.favicon {
 	border-left: 1px solid var(--fl-border-strong);
 	box-shadow: -12px 0 32px #00000066;
 	transform: translateX(100%);
-	transition: transform 0.25s ease;
+	transition: transform 0.25s ease, display 0.25s allow-discrete;
 	z-index: 30;
 	pointer-events: none;
 }
 
 #stream.normal.hide_posts .flux.active > .flux_content {
+	display: block;
 	transform: translateX(0);
 	pointer-events: auto;
+}
+
+@starting-style {
+	#stream.normal.hide_posts .flux.active > .flux_content {
+		transform: translateX(100%);
+	}
 }
 
 #stream.normal.hide_posts .flux > .flux_content .content {

@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.5.0 — 2026-10-01
+
+**Actual root cause of the "images go wonky after 4-5 load-more clicks"
+bug — it was this theme.** The slide-in article panel kept *every*
+loaded article's content `display: block`, parked off-screen as a
+`position: fixed` + `transform` panel. So every loaded article became its
+own full-height, box-shadowed GPU compositor layer, and because those
+panels sat just past the right edge, the browser's lazy-loader treated
+them as near-viewport and decoded every article's full-size body images
+too. GPU texture memory grew with every "load more" until image
+rendering corrupted; disabling hardware acceleration only hid it.
+
+Fix: non-active rows stay `display: none` (FreshRSS's own default); only
+`.flux.active` gets the fixed panel. The slide-in is preserved with
+`@starting-style`, and `transition-behavior: allow-discrete` on
+`display` keeps the slide-out animation; older browsers just show/hide
+instantly. The 1.4.x `content-visibility` attempt also makes sense in
+hindsight: containment made each row the containing block for its
+`position: fixed` panel, trapping the panel inside the row.
+
 ## 1.4.1 — 2026-09-28
 
 Reverted 1.4.0's `content-visibility: auto` on `.flux` rows, same day it
